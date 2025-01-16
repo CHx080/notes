@@ -54,7 +54,7 @@ Intel-CPU默认开启**超线程**，将**1个物理核虚拟为2个逻辑核**�
 
 > *getconf -a | grep CACHE查看各级缓存信息*
 
-![image-20250116142516876](C:/Users/chx11/AppData/Roaming/Typora/typora-user-images/image-20250116142516876.png)
+![img](https://i-blog.csdnimg.cn/direct/6d75e29f81434c7b8190734ed8e69030.png)
 
 *CACHE_SIZE表示缓存大小，CACHE_ASSOC表示N路组相联，CACHE_LINESIZE表示缓存行(读写基本单位)*
 

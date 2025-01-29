@@ -229,7 +229,7 @@ int main(){
 }
 ```
 
-链接会失败，弹出无法解析的外部符号。原因是C_function在其定义文件中的符号名是C_function，而在其引用文件中的符号名是、、_Z10C_functionv，链接器会找不到\_Z10C_functionv的地址。
+链接会失败，弹出无法解析的外部符号。原因是C_function在其定义文件中的符号名是C_function，而在其引用文件中的符号名是_Z10C_functionv，链接器会找不到\_Z10C_functionv的地址。
 
 extern "C"用于解决此类问题，C++源文件中经过extern "C"修饰的函数会按照C方式编译，不对其进行任何额外修饰。
 

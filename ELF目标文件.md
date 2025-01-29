@@ -52,7 +52,7 @@ Idx Name          Size      VMA               File off
 
 .data是已初始化的全局变量和静态变量，长度为**8H**字节*(恰好等于global_init_var和static_var之和)*，位于目标文件始偏移量**a4H**字节处
 
-.bss是未初始化的静态变量，位于目标文件始偏移量**acH**字节处——bss段在目标文件中的实际长度为0，尽管size=4*(恰好等于static_var2大小,global_uninit_var不存在任何段)*，但是可以通过file off判断出它的长度就是0*(.rodata段的偏移量也为acH)*，原因是未初始化的变量由编译器设置默认值，不需要额外的存储开销
+.bss是未初始化的静态变量，位于目标文件始偏移量**acH**字节处——bss段在目标文件中的实际长度为0，尽管size=4*(恰好等于static_var2大小,global_uninit_var存放在其他duan)*，但是可以通过file off判断出它的长度就是0*(.rodata段的偏移量也为acH)*，原因是未初始化的变量由编译器设置默认值，不需要额外的存储开销
 
 .rodata是只读的全局数据，长度为**4H**字节*(%d\\n\\0)*
 
@@ -93,7 +93,7 @@ Type字段表示段的类型NULL-无效段，PROGBITS-代码段或数据段，NO
 
 > ELF文件中用到了很多字符串，比如段名、变量名等。因为字符串长度往往是不定的。所以用固定的结构表示比较困难。gcc将字符串集中存放到一个字符串表方便读取。字符串表又分为**普通字符串表**和**段表字符串表**，普通字符串表保存各种符号的名字，段表字符串表保存各个段名
 
-*sample.c中只有printf需要重定位，没有数据需要重定位，因此sample.o中仅有.rela.text而无.rela.data*
+
 
 ![image-20250129094953629](https://chx-typora.oss-cn-hangzhou.aliyuncs.com/typora/image-20250129094953629.png)
 

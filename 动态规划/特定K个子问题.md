@@ -170,7 +170,7 @@ int nthUglyNumber(int n) {
 
 https://leetcode.cn/problems/super-ugly-number/description/
 
-与丑数II同理*
+*与丑数II同理*
 
 ```c++
 int nthSuperUglyNumber(int n, vector<int>& primes) {

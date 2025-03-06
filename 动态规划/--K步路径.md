@@ -1,3 +1,5 @@
+==**DP数组定义为经过k步之后到达某个位置的方案数**==
+
 # 原地方案数
 
 https://leetcode.cn/problems/number-of-ways-to-stay-in-the-same-place-after-some-steps/description/
@@ -7,16 +9,16 @@ https://leetcode.cn/problems/number-of-ways-to-stay-in-the-same-place-after-some
 > ```c++
 > int mod = 1e9 + 7, n;
 > int _numWays(int cur,int step) { //_numWays返回经过step步后还在cur位置的方案数
->     if (step < 0 || cur < 0 || cur >= n) return 0;
->     if (step == 0) return cur == 0 ? 1 : 0;
->     int leftMove = _numWays(cur - 1, step - 1);
->     int rightMove = _numWays(cur + 1, step - 1);
->     int staticMove = _numWays(cur, step - 1);
->     return ((long long)leftMove + rightMove + staticMove) % mod;
+>        if (step < 0 || cur < 0 || cur >= n) return 0;
+>        if (step == 0) return cur == 0 ? 1 : 0;
+>        int leftMove = _numWays(cur - 1, step - 1);
+>        int rightMove = _numWays(cur + 1, step - 1);
+>        int staticMove = _numWays(cur, step - 1);
+>        return ((long long)leftMove + rightMove + staticMove) % mod;
 > }
 > int numWays(int steps, int arrLen) {
->     n = arrLen;
->     return _numWays(0, steps);
+>        n = arrLen;
+>        return _numWays(0, steps);
 > }
 > ```
 
@@ -24,18 +26,18 @@ https://leetcode.cn/problems/number-of-ways-to-stay-in-the-same-place-after-some
 >
 > ```c++
 > int numWays(int k, int n) {
->     int mod=1e9+7;
->     n=min(n,k+1);  //不加会超时 k的最大值远小于n的
->     auto dp=vector(k+1,vector(n,(long)0));
->     //dp(i,j)表示经过i步后在下标j处的方案数
->     dp[0][0]=1;
->     for(int i=1;i<=k;++i){
->         for(int j=1;j<n-1;++j)
->             dp[i][j]=(dp[i-1][j]+dp[i-1][j-1]+dp[i-1][j+1])%mod;
->         if(n>1) dp[i][0]=(dp[i-1][0]+dp[i-1][1])%mod; else dp[i][0]=dp[i-1][0];
->         if(n>1) dp[i][n-1]=(dp[i-1][n-1]+dp[i-1][n-2])%mod;
->     }
->     return dp[k][0];
+>        int mod=1e9+7;
+>        n=min(n,k+1);  //不加会超时 k的最大值远小于n的
+>        auto dp=vector(k+1,vector(n,(long)0));
+>        //dp(i,j)表示经过i步后在下标j处的方案数
+>        dp[0][0]=1;
+>        for(int i=1;i<=k;++i){
+>            for(int j=1;j<n-1;++j)
+>                dp[i][j]=(dp[i-1][j]+dp[i-1][j-1]+dp[i-1][j+1])%mod;
+>            if(n>1) dp[i][0]=(dp[i-1][0]+dp[i-1][1])%mod; else dp[i][0]=dp[i-1][0];
+>            if(n>1) dp[i][n-1]=(dp[i-1][n-1]+dp[i-1][n-2])%mod;
+>        }
+>        return dp[k][0];
 > 
 > }
 > ```
@@ -44,18 +46,18 @@ https://leetcode.cn/problems/number-of-ways-to-stay-in-the-same-place-after-some
 >
 > ```c++
 > int numWays(int k,int n){
->     int mod=1e9+7;
->     n=min(n,k+1);
->     vector<long> tmp(n);
->     vector<long> dp(n,0);dp[0]=1;
->     for(int i=1;i<=k;++i){
->         tmp.swap(dp);
->         for(int j=1;j<n-1;++j)
->             dp[j]=(tmp[j-1]+tmp[j]+tmp[j+1])%mod;
->         if(n>1) dp[0]=(tmp[0]+tmp[1])%mod; else dp[0]=tmp[0];
->         if(n>1) dp[n-1]=(tmp[n-1]+tmp[n-2])%mod; 
->     }
->     return dp[0];
+>        int mod=1e9+7;
+>        n=min(n,k+1);
+>        vector<long> tmp(n);
+>        vector<long> dp(n,0);dp[0]=1;
+>        for(int i=1;i<=k;++i){
+>            tmp.swap(dp);
+>            for(int j=1;j<n-1;++j)
+>                dp[j]=(tmp[j-1]+tmp[j]+tmp[j+1])%mod;
+>            if(n>1) dp[0]=(tmp[0]+tmp[1])%mod; else dp[0]=tmp[0];
+>            if(n>1) dp[n-1]=(tmp[n-1]+tmp[n-2])%mod; 
+>        }
+>        return dp[0];
 > }
 > ```
 

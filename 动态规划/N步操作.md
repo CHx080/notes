@@ -164,15 +164,22 @@ int findRotateSteps(string ring, string key) {
 https://leetcode.cn/problems/k-inverse-pairs-array/description/
 
 ```c++
-
-```
-
-## DI序列有效排列
-
-https://leetcode.cn/problems/valid-permutations-for-di-sequence/description/
-
-```c++
-
+int kInversePairs(int n, int k) {
+    auto dp=vector(n+1,vector(k+1,(long)0));
+    int mod=1e9+7;
+    dp[0][0]=1;
+    //dp(i,j)::=1~i形成恰好j个逆序对的个数
+    for(int i=1;i<=n;++i){
+        dp[i][0]=1;
+        for(int j=1;j<=k;++j)
+            for(int x=1;x<=i;++x){
+                if(j-i+x<0) continue;
+                dp[i][j]+=dp[i-1][j-i+x]; //相对大小不变
+                dp[i][j]%=mod;
+            }
+    }
+    return dp[n][k];
+}
 ```
 
 ## 多米诺-托米诺平铺
@@ -192,14 +199,6 @@ int numTilings(int n) {
         dp[i]=(dp[i-1]*2+dp[i-3])%mod;
     return dp[n];
 }
-```
-
-## 应试学生最大数
-
-https://leetcode.cn/problems/maximum-students-taking-exam/description/
-
-```c++
-
 ```
 
 ## 解码方法
